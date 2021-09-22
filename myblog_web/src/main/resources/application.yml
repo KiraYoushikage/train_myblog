@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: myblog-web
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myblog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 47.98.62.150
+    port: 6379
+    database: 0
+    password: 123456 #redis密码
+
+#    # 连接池最大连接数（使用负值表示没有限制）
+#    spring.redis.pool.max-active=200
+#    # 连接池最大阻塞等待时间（使用负值表示没有限制）
+#    spring.redis.pool.max-wait=-1
+#    # 连接池中的最大空闲连接
+#    spring.redis.pool.max-idle=10
+#    # 连接池中的最小空闲连接
+#    spring.redis.pool.min-idle=0
+#    # 连接超时时间（毫秒）
+#    spring.redis.timeout=1000
+
+enable:
+  swagger2: true
+
+server:
+  port: 8000
+  servlet:
+    session:
+      timeout: 21600 #设置会话时间，单位为秒
+    #设置上传文件大小
+    multipart:
+      max-file-size: 40MB
+      max-request-size: 100MB
+#logging:
+#  level:
+#    root: debug
+debug: true
+
+#配置MybatisPlus
+mybatis-plus:
+  mapper-locations: classpath*:com/kirayous/api/**/mapper/xml/*.xml #扫描xml文件，springboot的xml默认是放在Resources下的，但是你想放在别的地方，可以使用该配置
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+aliyun-oss:
+  url: "https://kirayous-myblog.oss-cn-shenzhen.aliyuncs.com" ##加上bucketname
+  endpoint: "oss-cn-shenzhen.aliyuncs.com" #注意，如果你没有域名，使用阿里给你备的假域名，不能使用bucket域名，只能使用endpoint域名
+  accessKeyId: "LTAI5tCubJvrvbgNXBR1KqoZ"
+  accessKeySecret: "ohi0qyIhsOyPoDcfeiUmfSNa69aiHl"
+  bucketName: "kirayous-myblog"
+
